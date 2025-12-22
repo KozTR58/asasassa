@@ -1,247 +1,224 @@
-// casual and modular script
-const yesBtn = document.getElementById('yesBtn');
-const noBtn = document.getElementById('noBtn');
-const promptText = document.getElementById('promptText');
-const afterText = document.getElementById('afterText');
-const faqTrigger = document.getElementById('faqTrigger');
-const faqSection = document.getElementById('faqSection');
-const closeFaqTop = document.getElementById('closeFaqTop');
-const closeFaqBottom = document.getElementById('closeFaqBottom');
-const confettiCanvas = document.getElementById('confetti');
-const cuteFly = document.getElementById('cuteFly');
-
-let escapes = 0;
-
-// 10 prompt variations
+// Simple interactive logic with randomization and confetti
 const prompts = [
   "Will you go out with me tonight",
-  "Hey want to hang out sometime",
-  "Would you be my date this week",
-  "Do you want to grab a coffee soon",
-  "Can I take you out on a real date",
-  "How about we try dinner together",
-  "Want to watch a movie with me sometime",
-  "Would you like to come with me to that thing",
-  "Do you want to catch a show together",
-  "Hey you want to go out just us two"
+  "Hey you I have to ask something small",
+  "This is awkward but honest Will you go out with me",
+  "Funny question but serious Will you say yes",
+  "I like you Would you go out with me",
+  "If you could say yes now Would you",
+  "Small ask big heart Will you go out with me",
+  "I will try my best Would you go out with me",
+  "No pressure but I had to ask Will you",
+  "One tiny chance Will you go out with me"
 ];
 
-// Rizz variations for yes result
-const yesRizz = [
+const compliments = [
+  "You look beautiful today",
+  "Hi gorgeous",
+  "You shine a little brighter right now",
+  "Your smile is unfair",
+  "You got that glow today",
+  "I like how you move through the room",
+  "You are quietly stunning",
+  "That outfit suits you perfectly",
+  "You grabbed my attention without trying",
+  "There is something kind about your face",
+  "You make this look easy",
+  "You brought the light with you",
+  "I can tell you laugh like you mean it",
+  "Your energy is oddly calming",
+  "You are the part I did not expect"
+];
+
+const youDexterEaster = [
+  "You",
+  "Dexter",
+  "You",
+  "Dexter",
+  "You"
+];
+
+const rizzTitles = [
+  "Will you go out with me I will make it worth your while",
+  "Will you go out with me and let me try my best",
+  "Will you go out with me I promise a bad joke or two",
+  "Will you go out with me I will bring the sun",
+  "Will you go out with me I will make it simple"
+];
+
+const yesResponses = [
   "You said yes Already grinning like a fool",
-  "You said yes Already smiling like an idiot and I love it",
-  "You said yes Already grinning like crazy I cannot hide it",
-  "You said yes Already flashing a stupid smile and it feels nice"
+  "You said yes I cant stop smiling like an idiot",
+  "You said yes Already smiling and thinking of a terrible joke",
+  "You said yes My day just got brighter I am grinning hard",
+  "You said yes Already grinning like a fool and blushing a bit"
 ];
 
-// small set of no responses
-const noReplies = [
-  "You cannot just say no that easily",
-  "Try again or be kind and press yes",
-  "That was rude but okay maybe later"
+const postYesLines = [
+  "Cant wait to see you I owe you at least one terrible joke",
+  "See you soon I will try to make you laugh",
+  "Cant wait to meet you I will bring snacks and bad jokes",
+  "See you soon I am already planning a small hello",
+  "Cant wait I will do my best to make you smile"
 ];
 
-// random Easter egg texts show sometimes
-const eggs = [
-  "HEY YOU",
-  "You are the one",
-  "Dexter vibes",
-  "small hello from the show",
-  "did you see that twist"
-];
+// elements
+const promptEl = document.getElementById("prompt");
+const titleEl = document.getElementById("mainTitle");
+const yesBtn = document.getElementById("yes");
+const noBtn = document.getElementById("no");
+const resultEl = document.getElementById("result");
+const faqToggle = document.getElementById("faqToggle");
+const faqPanel = document.getElementById("faq");
+const closeFaq = document.getElementById("closeFaq");
+const easter = document.getElementById("easter");
+const confettiCanvas = document.getElementById("confettiCanvas");
+const showFormBtn = document.getElementById("showFormBtn");
+const tinyForm = document.querySelector(".tinyForm");
+const hideForm = document.getElementById("hideForm");
+const flying = document.createElement("div");
+flying.className = "flying";
+flying.textContent = "💛";
 
-// choose a random prompt each load
-function setRandomPrompt(){
-  const p = prompts[Math.floor(Math.random() * prompts.length)];
-  promptText.textContent = p;
-}
-setRandomPrompt();
-
-// randomize labels sometimes too so it feels alive
-function randomizeLabels(){
-  if(Math.random() < 0.25){
-    yesBtn.textContent = "Yes please";
+// set some initial randomized content
+function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+function initContent(){
+  promptEl.textContent = pick(prompts);
+  titleEl.textContent = pick(rizzTitles);
+  // show random easter egg sometimes
+  if(Math.random() < 0.6){
+    easter.textContent = pick(youDexterEaster);
+    easter.style.opacity = 0.06 + Math.random()*0.18;
   } else {
-    yesBtn.textContent = "Yes";
-  }
-  if(Math.random() < 0.15){
-    noBtn.textContent = "No thanks";
-  } else {
-    noBtn.textContent = "No";
+    easter.textContent = "";
   }
 }
-randomizeLabels();
+initContent();
 
-// No button hover escape
-noBtn.addEventListener('mouseenter', () => {
+// No button escape behavior
+let escapes = 0;
+noBtn.addEventListener("mouseenter", () => {
   escapes++;
-  const w = window.innerWidth - noBtn.offsetWidth - 60;
-  const h = window.innerHeight - noBtn.offsetHeight - 60;
-  const x = Math.max(10, Math.floor(Math.random() * Math.max(20, w)));
-  const y = Math.max(60, Math.floor(Math.random() * Math.max(20, h)));
-  noBtn.style.position = 'fixed';
-  noBtn.style.left = x + 'px';
-  noBtn.style.top = y + 'px';
-  // shrink
-  const scale = Math.max(0.6, 1 - escapes * 0.07);
-  noBtn.style.transform = 'scale(' + scale + ')';
-  // grow yes
-  yesBtn.style.transform = 'scale(' + (1 + Math.min(0.6, escapes * 0.07)) + ')';
-  // tiny chance an Easter egg appears
-  if(Math.random() < 0.15) spawnEgg();
+  const w = window.innerWidth - noBtn.offsetWidth - 40;
+  const h = window.innerHeight - noBtn.offsetHeight - 40;
+  const x = Math.max(10, Math.floor(Math.random() * w));
+  const y = Math.max(60, Math.floor(Math.random() * h));
+  noBtn.style.position = "fixed";
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+  // shape and size change
+  const scale = Math.max(0.45, 1 - escapes * 0.12);
+  noBtn.style.transform = `scale(${scale}) rotate(${(Math.random()*40-20)}deg)`;
+  noBtn.style.borderRadius = `${10 + Math.floor(Math.random()*50)}%`;
+  // yes grows a bit and gets a different text sometimes
+  yesBtn.style.transform = `scale(${1 + Math.min(0.6, escapes * 0.12)})`;
 });
 
-// No click
-noBtn.addEventListener('click', (e) => {
+// if click no -> playful message
+noBtn.addEventListener("click", (e)=>{
   e.preventDefault();
-  noBtn.disabled = true;
-  promptText.textContent = noReplies[Math.floor(Math.random() * noReplies.length)];
-  afterText.textContent = "Try again or choose nicer";
-  noBtn.style.opacity = '0.45';
-  yesBtn.style.transform = 'scale(1.5)';
-  setTimeout(() => {
-    noBtn.disabled = false;
-    noBtn.style.opacity = '1';
-    setRandomPrompt();
-    afterText.textContent = "Click a button Be honest";
-    yesBtn.style.transform = '';
-  }, 1200);
+  resultEl.textContent = "You cannot just say no that easily";
+  promptEl.textContent = pick(prompts);
+  setTimeout(()=> {
+    resultEl.textContent = "Click a button. Be honest.";
+  }, 1300);
 });
 
-// Yes click -> confetti and cute fly and rizz lines
-yesBtn.addEventListener('click', () => {
-  // random rizz line
-  const line = yesRizz[Math.floor(Math.random() * yesRizz.length)];
-  promptText.textContent = line;
-  afterText.textContent = "Can’t wait to see you I owe you at least one terrible joke";
-  // make confetti
+// Yes click -> confetti and flying creature and rizz lines
+yesBtn.addEventListener("click", ()=>{
+  // randomize rizz line
+  const yLine = pick(yesResponses);
+  const pLine = pick(postYesLines);
+  resultEl.textContent = yLine;
+  // show small flying creature
+  document.body.appendChild(flying);
+  flying.style.display = "flex";
+  flying.style.left = (window.innerWidth/2 + (Math.random()*200-100)) + "px";
+  flying.style.top = (window.innerHeight/2 + (Math.random()*200-100)) + "px";
+  flying.animate([
+    { transform: "translateY(0) scale(0.9)", opacity: 0 },
+    { transform: "translateY(-180px) scale(1.1)", opacity: 1 },
+    { transform: "translateY(-360px) scale(0.7)", opacity: 0 }
+  ], { duration: 1500, easing: "cubic-bezier(.2,.9,.2,1)"});
+  setTimeout(()=>{ if(flying.parentNode) flying.parentNode.removeChild(flying); }, 1500);
+
+  // confetti
   launchConfetti();
-  // show cute flyer
-  flyCute();
-  // small extra: update prompt for next time
-  setTimeout(() => {
-    setRandomPrompt();
-    afterText.textContent = "Click a button Be honest";
-    promptText.textContent = "Hey I have something to ask";
-  }, 4000);
+
+  // small post yes message change after short delay
+  setTimeout(()=>{ resultEl.textContent = pLine; }, 800);
+
+  // change prompt to a random compliment once yes
+  setTimeout(()=>{ promptEl.textContent = pick(compliments); }, 900);
 });
 
-// FAQ open and close
-faqTrigger.addEventListener('click', () => {
-  faqSection.setAttribute('aria-hidden', 'false');
-  // tiny chance show egg when opening FAQ
-  if(Math.random() < 0.25) spawnEgg();
-  window.scrollTo(0,0);
+// FAQ open / close
+faqToggle.addEventListener("click", ()=> {
+  faqPanel.setAttribute("aria-hidden", "false");
+  window.scrollTo({ top: 0, behavior: "smooth" });
 });
-closeFaqTop.addEventListener('click', () => {
-  faqSection.setAttribute('aria-hidden', 'true');
-});
-closeFaqBottom.addEventListener('click', () => {
-  faqSection.setAttribute('aria-hidden', 'true');
-});
-document.addEventListener('keydown', (e) => {
-  if(e.key === 'Escape') faqSection.setAttribute('aria-hidden', 'true');
+closeFaq.addEventListener("click", ()=> {
+  faqPanel.setAttribute("aria-hidden", "true");
 });
 
-// Easter egg spawn small toast
-function spawnEgg(){
-  const t = document.createElement('div');
-  t.className = 'egg';
-  t.textContent = eggs[Math.floor(Math.random() * eggs.length)];
-  Object.assign(t.style, {
-    position: 'fixed',
-    right: (10 + Math.random() * 200) + 'px',
-    top: (10 + Math.random() * 200) + 'px',
-    padding: '8px 10px',
-    background: '#061024',
-    color: '#ffd43b',
-    borderRadius: '8px',
-    zIndex: 120,
-    fontWeight: 700,
-    opacity: 0,
-    transform: 'translateY(-10px)'
-  });
-  document.body.appendChild(t);
-  // animate in
-  requestAnimationFrame(() => {
-    t.style.transition = 'all 450ms ease';
-    t.style.opacity = 1;
-    t.style.transform = 'translateY(0)';
-  });
-  setTimeout(() => {
-    t.style.opacity = 0;
-    t.style.transform = 'translateY(-10px)';
-    setTimeout(() => t.remove(), 400);
-  }, 1600);
-}
+// tiny form open/close
+showFormBtn.addEventListener("click", ()=> {
+  tinyForm.style.display = "block";
+});
+hideForm.addEventListener("click", ()=> {
+  tinyForm.style.display = "none";
+});
 
-// Cute flyer animation
-function flyCute(){
-  cuteFly.style.opacity = 1;
-  cuteFly.style.bottom = '20vh';
-  cuteFly.style.transform = 'translateX(-50%) scale(1.1)';
-  setTimeout(() => {
-    cuteFly.style.transform = 'translateX(-50%) translateY(-120px) scale(1.2)';
-    cuteFly.style.opacity = 1;
-  }, 300);
-  setTimeout(() => {
-    cuteFly.style.bottom = '-120px';
-    cuteFly.style.opacity = 0;
-  }, 2800);
-}
+// keyboard escape to close
+document.addEventListener("keydown", (e)=> {
+  if(e.key === "Escape") {
+    faqPanel.setAttribute("aria-hidden", "true");
+    tinyForm.style.display = "none";
+  }
+});
 
-// minimal confetti
+// Confetti simple implementation
 function launchConfetti(){
-  const ctx = confettiCanvas.getContext('2d');
-  const w = confettiCanvas.width = window.innerWidth;
-  const h = confettiCanvas.height = window.innerHeight;
+  const ctx = confettiCanvas.getContext("2d");
+  resizeCanvas();
   const pieces = [];
-  for(let i = 0; i < 80; i++){
+  const count = 70;
+  for(let i=0;i<count;i++){
     pieces.push({
-      x: Math.random() * w,
-      y: Math.random() * -h,
-      r: 6 + Math.random() * 8,
-      vx: -2 + Math.random() * 4,
-      vy: 2 + Math.random() * 5,
-      color: randomColor()
+      x: Math.random()*confettiCanvas.width,
+      y: Math.random()*confettiCanvas.height - confettiCanvas.height,
+      w: 8 + Math.random()*8,
+      h: 6 + Math.random()*6,
+      color: `hsl(${Math.floor(Math.random()*60)+40},90%,55%)`,
+      vy: 2 + Math.random()*5,
+      vx: -2 + Math.random()*4,
+      rot: Math.random()*360,
+      vr: -6 + Math.random()*12
     });
   }
-  let t0 = performance.now();
-  function frame(t){
-    const dt = (t - t0) / 1000;
-    t0 = t;
-    ctx.clearRect(0,0,w,h);
+  let t=0;
+  const anim = setInterval(()=>{
+    t+=1;
+    ctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
     for(const p of pieces){
-      p.x += p.vx * 60 * dt;
-      p.y += p.vy * 60 * dt;
-      p.vy += 60 * 0.05 * dt;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.05;
+      p.rot += p.vr;
+      ctx.save();
+      ctx.translate(p.x,p.y);
+      ctx.rotate(p.rot * Math.PI/180);
       ctx.fillStyle = p.color;
-      ctx.fillRect(p.x, p.y, p.r, p.r * 0.6);
+      ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      ctx.restore();
     }
-    // stop when all off screen
-    if(pieces.every(p => p.y > h + 50)) {
-      ctx.clearRect(0,0,w,h);
-      return;
-    }
-    requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-}
-function randomColor(){
-  const palette = ['#ffd43b','#ff9f1c','#ff6b6b','#7bed9f','#70a1ff'];
-  return palette[Math.floor(Math.random() * palette.length)];
+    if(t>120){ clearInterval(anim); ctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height); }
+  },1000/60);
 }
 
-// make canvas full size on resize
-window.addEventListener('resize', () => {
+function resizeCanvas(){
   confettiCanvas.width = window.innerWidth;
   confettiCanvas.height = window.innerHeight;
-});
-
-// small accessibility focus
-yesBtn.addEventListener('keydown', (e) => {
-  if(e.key === 'Enter') yesBtn.click();
-});
-noBtn.addEventListener('keydown', (e) => {
-  if(e.key === 'Enter') noBtn.click();
-});
+}
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
