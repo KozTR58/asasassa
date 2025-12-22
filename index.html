@@ -3,104 +3,105 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Will you go out with me? — I will make it worth your while</title>
+  <title>Will you go out with me? — I'll make it worth your while</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="floatingSmileContainer" aria-hidden="true"></div>
+  <div id="bg-overlay"></div>
 
-  <header class="topbar">
-    <h1 class="title">Will you go out with me? I will make it worth your while</h1>
-    <button id="curiousBtn" class="curious">Curious about me? Click here →</button>
+  <header class="site-header">
+    <h1 class="main-title">Will you go out with me? — I'll make it worth your while</h1>
+    <nav class="top-actions">
+      <button id="curiousBtn" class="small">Curious about me? Click here</button>
+    </nav>
   </header>
 
   <main class="container">
-    <section class="card" id="mainCard">
-      <p id="subQuestion" class="subq"></p>
-
-      <div class="buttons">
-        <button id="yesBtn" class="btn yes">Yes <span class="emoji">😊</span></button>
-        <button id="noBtn" class="btn no">No <span class="emoji">😅</span></button>
+    <section class="card" id="questionCard">
+      <p id="subQuestion" class="sub-question">Hey. I have something to ask.</p>
+      <div class="control-row">
+        <button id="yesBtn" class="btn yes">Yes</button>
+        <div class="smiley" id="smiley">😊</div>
+        <button id="noBtn" class="btn no">No</button>
       </div>
-
-      <p id="hint" class="hint">Choose honestly</p>
+      <p id="resultText" class="result-text">Choose honestly</p>
     </section>
 
-    <section class="grid">
+    <section class="lower-grid">
       <div class="box" id="curiousBox">
         <h3>Curious about me</h3>
-        <p class="short">I am Kayra. I play games, I overthink things, and yeah sometimes I am a little slow. In quiet moments I find myself thinking about you sometimes.</p>
-        <button class="openModal small">Tell me more</button>
+        <p id="curiousShort">
+          I am Kayra. I play games, I overthink things, and yeah sometimes I am a little slow.
+          In quiet moments I find myself thinking about you sometimes.
+        </p>
+        <button id="tellMore" class="small">Tell me more</button>
       </div>
 
-      <div class="box">
+      <div class="box" id="randomQBox">
         <h3>Random question</h3>
-        <p id="randomQ">Wanna know which show I rewatch often?</p>
+        <p id="randomPrompt">Wanna know which show I rewatch often?</p>
       </div>
 
-      <div class="box">
+      <div class="box" id="sendNote">
         <h3>Send a note</h3>
         <input id="noteName" placeholder="Your name" />
         <textarea id="noteText" placeholder="Say hi tell me something"></textarea>
-        <p class="tiny">i might not see it still working on this thing</p>
-        <button id="saveNote" class="small">Save locally</button>
-        <p id="savedMsg" class="tiny muted"></p>
+        <p class="muted">i might not see i still working on this thing</p>
+        <button id="saveLoc" class="small">Save locally</button>
       </div>
     </section>
 
-    <footer class="footer">Please say yes</footer>
+    <footer class="footer">
+      <p class="please">Please say yes</p>
+    </footer>
   </main>
 
-  <!-- modal -->
-  <div id="modal" class="modal" aria-hidden="true">
-    <div class="modalContent">
-      <button class="modalCloseTop" aria-label="close">×</button>
-
-      <div class="modalInner">
-        <h2>Who is Kayra</h2>
+  <!-- Modal / FAQ -->
+  <div id="faqModal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true">
+      <button id="faqCloseTop" class="close-x" aria-label="Close">×</button>
+      <div class="modal-body">
+        <h2>Who is Kayra?</h2>
         <p class="who">
-I am Kayra.
-I play games I overthink things and yeah sometimes I am a little slow Not in a bad way just in a very human way I think a lot I feel a lot and I care more than I show
+I’m Kayra.
+I play games, I overthink things, and yeah sometimes I’m a little slow. In quiet moments I find myself thinking about you sometimes.
 
-I like music that hits for no reason
+I like music that hits for no reason.
 Ezhel Imkansizim
 Alexander Rybak Fairytale
 Sam Ask Herseyi Affeder Mi
 
-My favorite game is The Last of Us Part II
-My favorite show is Berlin
-My favorite color is yellow
+My favorite game is The Last of Us Part II.
+My favorite show is Berlin.
+My favorite color is yellow.
 
-If you have songs you love I would honestly listen to them too For me that is a pleasure Like Kali Uchis I Wish You Roses
+If you have songs you love, I would honestly listen to them too. For me, that’s a pleasure. Like Kali Uchis I Wish You Roses.
 
-This is just me No pressure
+This is just me. No pressure.
         </p>
 
-        <h3>Why did you make this</h3>
-        <p>Because saying things straight is hard This felt more honest than pretending I do not care Also I thought it would be fun</p>
+        <h3>Why did you make this?</h3>
+        <p>Because saying things straight is hard. This felt more honest than pretending I don’t care. Also I thought it would be fun.</p>
 
         <h3>FAQ</h3>
+        <div class="qa"><strong>You're not my type.</strong><p>That’s fair. I don’t really try to fit into types anyway. I just show up as myself.</p></div>
+        <div class="qa"><strong>I’m not into you.</strong><p>I understand. Thanks for being honest. I respect that.</p></div>
+        <div class="qa"><strong>Bro you’re fat, what are you 500 lbs?</strong><p>Yeah I’m big, but I’ve got space in my heart for good vibes and good music.</p></div>
+        <div class="qa"><strong>This is a bit much.</strong><p>Maybe a little. But it’s real. And I prefer real over cool.</p></div>
+        <div class="qa"><strong>Why should I say yes?</strong><p>Because yes is simple. Because I’m honest and kind. And because I’ll try.</p></div>
+        <div class="qa"><strong>What if I say no?</strong><p>That’s okay. You don’t owe me anything. I’ll respect it.</p></div>
+        <div class="qa"><strong>You’re doing things that actually make me uncomfortable.</strong><p>I understand, and I’m sorry for making you feel that way. For me to really know, you need to tell me directly. Otherwise, I might not realize it.</p></div>
+        <div class="qa"><strong>If you’re still here…</strong><p>Well if you’re still here, maybe you could give me a tiny chance.</p></div>
+      </div>
 
-        <div class="qa"><strong>You are not my type</strong><p>That is fair I do not really try to fit into types anyway I just show up as myself</p></div>
-        <div class="qa"><strong>I am not into you</strong><p>I understand Thanks for being honest I respect that</p></div>
-        <div class="qa"><strong>Bro you are fat what are you 500 lbs</strong><p>Yeah I am big but I have space in my heart for good vibes and good music</p></div>
-        <div class="qa"><strong>This is a bit much</strong><p>Maybe a little But it is real And I prefer real over cool</p></div>
-        <div class="qa"><strong>Why should I say yes</strong><p>Because yes is simple Because I am honest and kind And because I will try</p></div>
-        <div class="qa"><strong>What if I say no</strong><p>That is okay You do not owe me anything I will respect it</p></div>
-        <div class="qa"><strong>You are doing things that actually make me uncomfortable</strong><p>I understand and I am sorry for making you feel that way For me to really know you need to tell me directly Otherwise I might not realize it</p></div>
-        <div class="qa"><strong>If you are still here</strong><p>Well if you are still here maybe you could give me a tiny chance</p></div>
-
-        <div class="modalBottom">
-          <button id="modalCloseBottom" class="bigClose">Nevermind this is awkward but it is fine ❤️</button>
-        </div>
+      <div class="modal-bottom">
+        <button id="faqCloseBottom" class="small">Nevermind this is awkward but it's ok ❤️</button>
       </div>
     </div>
   </div>
 
-  <!-- cat flying + heart container -->
-  <div id="celebrationLayer" aria-hidden="true"></div>
-
-  <canvas id="confettiCanvas"></canvas>
+  <!-- Container for dynamic hearts/trail and confetti -->
+  <div id="particleLayer" aria-hidden="true"></div>
 
   <script src="script.js"></script>
 </body>
