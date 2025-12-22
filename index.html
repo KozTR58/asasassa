@@ -3,118 +3,148 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Will you go out with me — I will make it worth your while</title>
+  <title>Will you go out with me? I will make it worth your while</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <canvas id="confettiCanvas"></canvas>
-
-  <div class="site">
+  <main class="wrap">
     <header class="header">
-      <h1 id="mainTitle" class="title">Will you go out with me I will make it worth your while</h1>
-      <button id="faqToggle" class="faqToggle">Click here →</button>
+      <h1 class="siteTitle">Will you go out with me? I will make it worth your while</h1>
+      <div class="topBtns">
+        <button id="faqOpen" class="cta">Click here <span class="arrow">→</span></button>
+      </div>
     </header>
 
-    <main class="card" id="card">
-      <div id="easter" class="easter" aria-hidden="true"></div>
+    <section class="card" id="card">
+      <p id="prompt" class="prompt">Hey. I have something to ask.</p>
 
-      <p id="prompt" class="prompt">Hey I have something to ask</p>
-
-      <div class="btnRow">
+      <div class="choices">
         <button id="yes" class="btn yes">Yes</button>
         <button id="no" class="btn no">No</button>
       </div>
 
-      <p id="result" class="result">Click a button. Be honest.</p>
+      <p id="after" class="after">Choose honestly</p>
 
-      <div id="tinyForm" class="tinyForm">
-        <p>Want to say something? Drop a note</p>
-        <form id="contactForm" action="mailto:koztr58@gmail.com" method="get" enctype="text/plain">
-          <input name="subject" placeholder="subject" value="Site message" required />
-          <textarea name="body" placeholder="Say hi. Introduce yourself. i might not see it still working on this thing" required></textarea>
-          <div class="formRow">
-            <button type="submit" class="smallBtn">Send email</button>
-            <button type="button" id="hideForm" class="smallBtn">Close</button>
-          </div>
-        </form>
+      <div id="easter" class="easter" aria-hidden="true"></div>
+    </section>
+
+    <section id="extras" class="extras">
+      <div class="floatingHearts" aria-hidden="true"></div>
+
+      <div class="infoBoxes">
+        <div class="box">
+          <h4>Curious about me</h4>
+          <p id="miniBio">I am Kayra. I play games I overthink things and yeah sometimes I am a little slow. Not in a bad way just in a very human way. I think a lot I feel a lot and I care more than I show</p>
+        </div>
+
+        <div class="box">
+          <h4>Random question</h4>
+          <p id="randomQuestion">—</p>
+        </div>
+
+        <div class="box">
+          <h4>Send a note</h4>
+          <form id="noteForm">
+            <input id="name" placeholder="Your name" />
+            <textarea id="note" placeholder="Say hi tell me something"></textarea>
+            <div class="smallNote">i might not see it still working on this thing</div>
+            <button type="submit" class="smallCta">Save locally</button>
+          </form>
+          <div id="formResult" class="formResult" aria-hidden="true"></div>
+        </div>
       </div>
+    </section>
 
-      <div class="extras">
-        <button id="showFormBtn" class="smallBtn">Say hi</button>
-      </div>
-    </main>
+    <footer class="footer">
+      <p class="please">Please say yes</p>
+    </footer>
+  </main>
 
-    <aside id="faq" class="faqPanel" aria-hidden="true">
-      <div class="faqInner">
-        <button id="closeFaq" class="closeFaq">Close</button>
-        <h2>Who is Kayra</h2>
-        <p class="who">
+  <!-- FAQ panel -->
+  <aside id="faq" class="faqPanel" aria-hidden="true">
+    <div class="faqInner">
+      <button id="faqClose" class="closeFaq">Close</button>
+      <h2>Who is Kayra</h2>
+      <p class="who">
 I’m Kayra.
-I play games, I overthink things, and yeah sometimes I’m a little slow. Not in a bad way, just in a very human way. I think a lot, I feel a lot, and I care more than I show.
+I play games, I overthink things, and yeah sometimes I’m a little slow. Not in a bad way, just in a very human way. I think a lot I feel a lot and I care more than I show
 
-I like music that hits for no reason.
-Ezhel Imkansizim
+I like music that hits for no reason
+Ezhel İmkansızım
 Alexander Rybak Fairytale
-Sam Ask Herseyi Affeder Mi
+Sam Aşk Her Şeyi Affeder Mi
 
 My favorite game is The Last of Us Part II
 My favorite show is Berlin
 My favorite color is yellow
 
-If you have songs you love, I would honestly listen to them too. For me, that is a pleasure. Like Kali Uchis I Wish You Roses
+If you have songs you love I would honestly listen to them too For me that is a pleasure Like Kali Uchis I Wish You Roses
 
-This is just me. No pressure.
-        </p>
+This is just me No pressure
+      </p>
 
-        <h3>Why did you make this</h3>
-        <p>Because saying things straight is hard. This felt more honest than pretending I do not care. Also I thought it would be fun.</p>
+      <h3>Why did you make this</h3>
+      <p>Because saying things straight is hard This felt more honest than pretending I dont care Also I thought it would be fun</p>
 
-        <h3>FAQ</h3>
-
-        <div class="qa">
-          <strong>Youre not my type.</strong>
-          <p>That is fair. I do not really try to fit into types anyway. I just show up as myself.</p>
-        </div>
-
-        <div class="qa">
-          <strong>Im not into you.</strong>
-          <p>I understand. Thanks for being honest. I respect that.</p>
-        </div>
-
-        <div class="qa">
-          <strong>Bro youre fat what are you 500 lbs</strong>
-          <p>Yeah I am big, but I have space in my heart for good vibes and good music.</p>
-        </div>
-
-        <div class="qa">
-          <strong>This is a bit much</strong>
-          <p>Maybe a little. But it is real. And I prefer real over cool.</p>
-        </div>
-
-        <div class="qa">
-          <strong>Why should I say yes</strong>
-          <p>Because yes is simple. Because I am honest and kind. And because I will try.</p>
-        </div>
-
-        <div class="qa">
-          <strong>What if I say no</strong>
-          <p>That is okay. You do not owe me anything. I will respect it.</p>
-        </div>
-
-        <div class="qa">
-          <strong>Youre doing things that actually make me uncomfortable</strong>
-          <p>I understand and I am sorry for making you feel that way. For me to really know, you need to tell me directly. Otherwise I might not realize it.</p>
-        </div>
-
-        <div class="qa">
-          <strong>If youre still here</strong>
-          <p>Well if you are still here, maybe you could give me a tiny chance.</p>
-        </div>
-
+      <div class="faqQ">
+        <strong>Youre not my type</strong>
+        <p>That is fair I do not really try to fit into types anyway I just show up as myself</p>
       </div>
-    </aside>
 
-    <footer class="footer">Please say yes</footer>
+      <div class="faqQ">
+        <strong>Im not into you</strong>
+        <p>I understand Thanks for being honest I respect that</p>
+      </div>
+
+      <div class="faqQ">
+        <strong>Bro youre fat what are you 500 lbs</strong>
+        <p>Yeah I am big but I got space in my heart for good vibes and good music</p>
+      </div>
+
+      <div class="faqQ">
+        <strong>This is a bit much</strong>
+        <p>Maybe a little But it is real And I prefer real over cool</p>
+      </div>
+
+      <div class="faqQ">
+        <strong>Why should I say yes</strong>
+        <p>Because yes is simple Because I am honest and kind And because I will try</p>
+      </div>
+
+      <div class="faqQ">
+        <strong>What if I say no</strong>
+        <p>That is okay You do not owe me anything I will respect it</p>
+      </div>
+
+      <div class="faqQ">
+        <strong>Youre doing things that actually make me uncomfortable</strong>
+        <p>I understand and I am sorry for making you feel that way For me to really know you need to tell me directly Otherwise I might not realize it</p>
+      </div>
+
+      <div class="faqQ">
+        <strong>If youre still here</strong>
+        <p>Well if youre still here maybe you could give me a tiny chance</p>
+      </div>
+
+    </div>
+  </aside>
+
+  <!-- confetti canvas -->
+  <canvas id="confettiCanvas" class="confetti"></canvas>
+
+  <!-- cat SVG flight container -->
+  <div id="catFly" class="catFly" aria-hidden="true">
+    <!-- a simple inline SVG cat as cute sprite -->
+    <svg viewBox="0 0 120 120" class="catSvg">
+      <g>
+        <circle cx="60" cy="60" r="40" fill="#ffd43b" />
+        <circle cx="48" cy="55" r="6" fill="#061024" />
+        <circle cx="72" cy="55" r="6" fill="#061024" />
+        <path d="M45 75 Q60 90 75 75" stroke="#061024" stroke-width="3" fill="none" stroke-linecap="round" />
+        <polygon points="33,42 43,28 53,42" fill="#ffd43b" />
+        <polygon points="87,42 77,28 67,42" fill="#ffd43b" />
+      </g>
+    </svg>
   </div>
 
   <script src="script.js"></script>
