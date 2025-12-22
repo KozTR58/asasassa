@@ -3,141 +3,119 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Will you go out with me I will make it worth your while</title>
+  <title>Will you go out with me — I will make it worth your while</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="page">
-    <header class="top">
-      <h1 class="title">Will you go out with me I will make it worth your while</h1>
-      <div class="top-actions">
-        <button id="faqTrigger" class="small">Click here →</button>
-      </div>
+  <canvas id="confettiCanvas"></canvas>
+
+  <div class="site">
+    <header class="header">
+      <h1 id="mainTitle" class="title">Will you go out with me I will make it worth your while</h1>
+      <button id="faqToggle" class="faqToggle">Click here →</button>
     </header>
 
-    <section class="card" id="mainCard">
-      <p id="promptText" class="prompt">Hey. I have something to ask.</p>
+    <main class="card" id="card">
+      <div id="easter" class="easter" aria-hidden="true"></div>
 
-      <div class="buttons" id="buttonArea">
-        <button id="yesBtn" class="btn yes">Yes</button>
-        <button id="noBtn" class="btn no">No</button>
+      <p id="prompt" class="prompt">Hey I have something to ask</p>
+
+      <div class="btnRow">
+        <button id="yes" class="btn yes">Yes</button>
+        <button id="no" class="btn no">No</button>
       </div>
 
-      <p id="afterText" class="after">Click a button. Be honest.</p>
-    </section>
+      <p id="result" class="result">Click a button. Be honest.</p>
 
-    <section class="faq" id="faqSection" aria-hidden="true">
-      <div class="faq-inner" role="dialog" aria-modal="true">
-        <button id="closeFaqTop" class="small">Close</button>
+      <div id="tinyForm" class="tinyForm">
+        <p>Want to say something? Drop a note</p>
+        <form id="contactForm" action="mailto:koztr58@gmail.com" method="get" enctype="text/plain">
+          <input name="subject" placeholder="subject" value="Site message" required />
+          <textarea name="body" placeholder="Say hi. Introduce yourself. i might not see it still working on this thing" required></textarea>
+          <div class="formRow">
+            <button type="submit" class="smallBtn">Send email</button>
+            <button type="button" id="hideForm" class="smallBtn">Close</button>
+          </div>
+        </form>
+      </div>
 
-        <h2>Who is Kayra?</h2>
+      <div class="extras">
+        <button id="showFormBtn" class="smallBtn">Say hi</button>
+      </div>
+    </main>
+
+    <aside id="faq" class="faqPanel" aria-hidden="true">
+      <div class="faqInner">
+        <button id="closeFaq" class="closeFaq">Close</button>
+        <h2>Who is Kayra</h2>
         <p class="who">
 I’m Kayra.
-I play games I overthink things and yeah sometimes I’m a little slow Not in a bad way just in a very human way I think a lot I feel a lot and I care more than I show
+I play games, I overthink things, and yeah sometimes I’m a little slow. Not in a bad way, just in a very human way. I think a lot, I feel a lot, and I care more than I show.
 
-I like music that hits for no reason
-Ezhel İmkânsızım
+I like music that hits for no reason.
+Ezhel Imkansizim
 Alexander Rybak Fairytale
-Sam Aşk Her Şeyi Affeder mi
+Sam Ask Herseyi Affeder Mi
 
 My favorite game is The Last of Us Part II
 My favorite show is Berlin
 My favorite color is yellow
 
-If you have songs you love I would honestly listen to them too For me that is a pleasure Like Kali Uchis I Wish You Roses
+If you have songs you love, I would honestly listen to them too. For me, that is a pleasure. Like Kali Uchis I Wish You Roses
 
-This is just me No pressure
+This is just me. No pressure.
         </p>
 
         <h3>Why did you make this</h3>
-        <p>Because saying things straight is hard This felt more honest than pretending I do not care Also I thought it would be fun</p>
+        <p>Because saying things straight is hard. This felt more honest than pretending I do not care. Also I thought it would be fun.</p>
 
         <h3>FAQ</h3>
 
         <div class="qa">
-          <strong>You are not my type.</strong>
-          <p>That’s fair I don’t really try to fit into types anyway I just show up as myself</p>
+          <strong>Youre not my type.</strong>
+          <p>That is fair. I do not really try to fit into types anyway. I just show up as myself.</p>
         </div>
 
         <div class="qa">
-          <strong>I am not into you.</strong>
-          <p>I understand Thanks for being honest I respect that</p>
+          <strong>Im not into you.</strong>
+          <p>I understand. Thanks for being honest. I respect that.</p>
         </div>
 
         <div class="qa">
-          <strong>Bro you are fat what are you 500 lbs</strong>
-          <p>Yeah I am big but I have space in my heart for good vibes and good music</p>
+          <strong>Bro youre fat what are you 500 lbs</strong>
+          <p>Yeah I am big, but I have space in my heart for good vibes and good music.</p>
         </div>
 
         <div class="qa">
           <strong>This is a bit much</strong>
-          <p>Maybe a little But it is real And I prefer real over cool</p>
+          <p>Maybe a little. But it is real. And I prefer real over cool.</p>
         </div>
 
         <div class="qa">
           <strong>Why should I say yes</strong>
-          <p>Because yes is simple Because I am honest and kind And because I will try</p>
+          <p>Because yes is simple. Because I am honest and kind. And because I will try.</p>
         </div>
 
         <div class="qa">
           <strong>What if I say no</strong>
-          <p>That is okay You do not owe me anything I will respect it</p>
+          <p>That is okay. You do not owe me anything. I will respect it.</p>
         </div>
 
         <div class="qa">
-          <strong>You are doing things that actually make me uncomfortable</strong>
-          <p>I understand and I am sorry for making you feel that way For me to really know you need to tell me directly Otherwise I might not realize it</p>
+          <strong>Youre doing things that actually make me uncomfortable</strong>
+          <p>I understand and I am sorry for making you feel that way. For me to really know, you need to tell me directly. Otherwise I might not realize it.</p>
         </div>
 
         <div class="qa">
-          <strong>If you are still here</strong>
-          <p>Well if you are still here maybe you could give me a tiny chance</p>
-        </div>
-
-        <hr />
-
-        <h3>Contact</h3>
-        <p>If you want to say hi leave a short note below I might not see it still working on this thing</p>
-
-        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contactForm">
-          <input type="hidden" name="form-name" value="contact" />
-          <p style="display:none">
-            <label>Don’t fill this out if you are human<input name="bot-field" /></label>
-          </p>
-          <label>
-            Your name
-            <input type="text" name="name" placeholder="Just a name" required />
-          </label>
-          <label>
-            Your email
-            <input type="email" name="email" placeholder="your@email.com" />
-          </label>
-          <label>
-            Message
-            <textarea name="message" placeholder="Say hi or tell me a song" required></textarea>
-          </label>
-          <p class="note">i might not see it still working on this thing</p>
-          <div class="form-actions">
-            <button type="submit" class="small">Send</button>
-            <a class="small" href="mailto:koztr58@gmail.com">Or email me directly</a>
-          </div>
-        </form>
-
-        <div class="bottom-close">
-          <button id="closeFaqBottom" class="small">Close FAQ</button>
+          <strong>If youre still here</strong>
+          <p>Well if you are still here, maybe you could give me a tiny chance.</p>
         </div>
 
       </div>
-    </section>
+    </aside>
 
-    <footer class="foot">
-      <p>Please say yes</p>
-    </footer>
-
-    <canvas id="confetti" class="confetti"></canvas>
-    <div id="cuteFly" class="cute">🕊️</div>
-
-  </main>
+    <footer class="footer">Please say yes</footer>
+  </div>
 
   <script src="script.js"></script>
 </body>
