@@ -1,256 +1,108 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Hey You</title>
-
-<style>
-/* === BACKGROUND === */
-body {
-  margin: 0;
-  min-height: 100vh;
-  overflow-x: hidden;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(
-    120deg,
-    #a8e6cf,
-    #dcedc1,
-    #ffd3b6,
-    #ffaaa5
-  );
-  background-size: 400% 400%;
-  animation: bgMove 25s ease infinite;
-}
-
-@keyframes bgMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* === CENTER === */
-.container {
-  text-align: center;
-  padding-top: 15vh;
-}
-
-h1 {
-  font-size: 36px;
-}
-
-button {
-  font-size: 18px;
-  padding: 12px 24px;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-  margin: 10px;
-}
-
-#yesBtn {
-  background: #ff5c8a;
-  color: white;
-}
-
-#noBtn {
-  background: #ccc;
-}
-
-/* === FLOATING COMPLIMENTS === */
-.floating-compliment {
-  position: fixed;
-  font-size: 14px;
-  background: rgba(255,255,255,0.7);
-  padding: 6px 10px;
-  border-radius: 14px;
-  pointer-events: none;
-  animation: floatFade 4s ease forwards;
-}
-
-@keyframes floatFade {
-  0% { opacity: 0; transform: translateY(10px); }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { opacity: 0; transform: translateY(-20px); }
-}
-
-/* === HEART CURSOR === */
-.heart {
-  position: fixed;
-  color: red;
-  font-size: 14px;
-  pointer-events: none;
-  animation: heartFade 1.5s linear forwards;
-}
-
-@keyframes heartFade {
-  to {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-}
-
-/* === MODAL === */
-#about {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.4);
-}
-
-#aboutContent {
-  background: #ffe066;
-  margin: 5vh auto;
-  padding: 20px;
-  width: 80%;
-  max-height: 80vh;
-  overflow-y: auto;
-  border-radius: 20px;
-}
-
-.close {
-  float: right;
-  cursor: pointer;
-}
-
-/* === CAT === */
-#cat {
-  display: none;
-  font-size: 60px;
-  animation: jump 1s ease infinite alternate;
-}
-
-@keyframes jump {
-  from { transform: translateY(0); }
-  to { transform: translateY(-20px); }
-}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Will you go out with me? — I'll make it worth your while</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
+  <div id="bg-overlay"></div>
 
-<div class="container">
-  <h1 id="question">Hey you</h1>
+  <header class="site-header">
+    <h1 class="main-title">Will you go out with me? — I'll make it worth your while</h1>
+    <nav class="top-actions">
+      <button id="curiousBtn" class="small">Curious about me? Click here</button>
+    </nav>
+  </header>
 
-  <button id="yesBtn">Yes</button>
-  <button id="noBtn">No</button>
+  <main class="container">
+    <section class="card" id="questionCard">
+      <p id="subQuestion" class="sub-question">Hey. I have something to ask.</p>
+      <div class="control-row">
+        <button id="yesBtn" class="btn yes">Yes</button>
+        <div class="smiley" id="smiley">😊</div>
+        <button id="noBtn" class="btn no">No</button>
+      </div>
+      <p id="resultText" class="result-text">Choose honestly</p>
+    </section>
 
-  <p style="margin-top:20px;cursor:pointer" onclick="openAbout()">
-    Curious about me? click here
-  </p>
+    <section class="lower-grid">
+      <div class="box" id="curiousBox">
+        <h3>Curious about me</h3>
+        <p id="curiousShort">
+          I am Kayra. I play games, I overthink things, and yeah sometimes I am a little slow.
+          In quiet moments I find myself thinking about you sometimes.
+        </p>
+        <button id="tellMore" class="small">Tell me more</button>
+      </div>
 
-  <div id="cat">🐱❤️</div>
-</div>
+      <div class="box" id="randomQBox">
+        <h3>Random question</h3>
+        <p id="randomPrompt">Wanna know which show I rewatch often?</p>
+      </div>
 
-<!-- ABOUT / FAQ -->
-<div id="about">
-  <div id="aboutContent">
-    <span class="close" onclick="closeAbout()">✖</span>
+      <div class="box" id="sendNote">
+        <h3>Send a note</h3>
+        <input id="noteName" placeholder="Your name" />
+        <textarea id="noteText" placeholder="Say hi tell me something"></textarea>
+        <p class="muted">i might not see i still working on this thing</p>
+        <button id="saveLoc" class="small">Save locally</button>
+      </div>
+    </section>
 
-    <h2>About me</h2>
-    <p>
-      I am Kayra. I play games, I overthink things,
-      and yeah sometimes I am a little slow.
-      In quiet moments I find myself thinking about you sometimes.
-    </p>
+    <footer class="footer">
+      <p class="please">Please say yes</p>
+    </footer>
+  </main>
 
-    <p>
-      Favorite game: The Last of Us Part II<br>
-      Favorite show: Berlin<br>
-      Favorite color: Yellow
-    </p>
+  <!-- Modal / FAQ -->
+  <div id="faqModal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true">
+      <button id="faqCloseTop" class="close-x" aria-label="Close">×</button>
+      <div class="modal-body">
+        <h2>Who is Kayra?</h2>
+        <p class="who">
+I’m Kayra.
+I play games, I overthink things, and yeah sometimes I’m a little slow. In quiet moments I find myself thinking about you sometimes.
 
-    <p>
-      If you have songs you love, I would honestly listen to them too.
-      Like Kali Uchis I Wish You Roses.
-    </p>
+I like music that hits for no reason.
+Ezhel Imkansizim
+Alexander Rybak Fairytale
+Sam Ask Herseyi Affeder Mi
 
-    <p style="margin-top:30px;cursor:pointer" onclick="closeAbout()">
-      Nevermind this is awkward
-    </p>
+My favorite game is The Last of Us Part II.
+My favorite show is Berlin.
+My favorite color is yellow.
+
+If you have songs you love, I would honestly listen to them too. For me, that’s a pleasure. Like Kali Uchis I Wish You Roses.
+
+This is just me. No pressure.
+        </p>
+
+        <h3>Why did you make this?</h3>
+        <p>Because saying things straight is hard. This felt more honest than pretending I don’t care. Also I thought it would be fun.</p>
+
+        <h3>FAQ</h3>
+        <div class="qa"><strong>You're not my type.</strong><p>That’s fair. I don’t really try to fit into types anyway. I just show up as myself.</p></div>
+        <div class="qa"><strong>I’m not into you.</strong><p>I understand. Thanks for being honest. I respect that.</p></div>
+        <div class="qa"><strong>Bro you’re fat, what are you 500 lbs?</strong><p>Yeah I’m big, but I’ve got space in my heart for good vibes and good music.</p></div>
+        <div class="qa"><strong>This is a bit much.</strong><p>Maybe a little. But it’s real. And I prefer real over cool.</p></div>
+        <div class="qa"><strong>Why should I say yes?</strong><p>Because yes is simple. Because I’m honest and kind. And because I’ll try.</p></div>
+        <div class="qa"><strong>What if I say no?</strong><p>That’s okay. You don’t owe me anything. I’ll respect it.</p></div>
+        <div class="qa"><strong>You’re doing things that actually make me uncomfortable.</strong><p>I understand, and I’m sorry for making you feel that way. For me to really know, you need to tell me directly. Otherwise, I might not realize it.</p></div>
+        <div class="qa"><strong>If you’re still here…</strong><p>Well if you’re still here, maybe you could give me a tiny chance.</p></div>
+      </div>
+
+      <div class="modal-bottom">
+        <button id="faqCloseBottom" class="small">Nevermind this is awkward but it's ok ❤️</button>
+      </div>
+    </div>
   </div>
-</div>
 
-<script>
-/* === RANDOM QUESTIONS === */
-const questions = [
-  "Will you go out with me",
-  "What if this works",
-  "Hey you look beautiful today",
-  "This might be stupid but hi",
-  "Can I make you smile",
-  "So… dinner maybe",
-  "What if I’m serious",
-  "I had to ask"
-];
+  <!-- Container for dynamic hearts/trail and confetti -->
+  <div id="particleLayer" aria-hidden="true"></div>
 
-document.getElementById("question").innerText =
-  questions[Math.floor(Math.random() * questions.length)];
-
-/* === YES === */
-const yesTexts = [
-  "You said yes. Already grinning like a fool.",
-  "I’m smiling so hard right now.",
-  "Okay wow that just made my day.",
-  "I promise I’ll try my best.",
-  "This is my favorite answer."
-];
-
-document.getElementById("yesBtn").onclick = () => {
-  document.getElementById("question").innerText =
-    yesTexts[Math.floor(Math.random() * yesTexts.length)];
-  document.getElementById("cat").style.display = "block";
-};
-
-/* === NO BUTTON ESCAPE === */
-const noBtn = document.getElementById("noBtn");
-noBtn.onmouseover = () => {
-  noBtn.style.position = "absolute";
-  noBtn.style.left = Math.random() * 80 + "vw";
-  noBtn.style.top = Math.random() * 80 + "vh";
-};
-
-/* === FLOATING COMPLIMENTS === */
-const compliments = [
-  "You’re really cute",
-  "You have a nice vibe",
-  "Hard not to like you",
-  "You feel warm",
-  "Main character energy"
-];
-
-function spawnCompliment() {
-  const el = document.createElement("div");
-  el.className = "floating-compliment";
-  el.innerText =
-    compliments[Math.floor(Math.random() * compliments.length)];
-  el.style.left = Math.random() * 80 + "vw";
-  el.style.top = Math.random() * 80 + "vh";
-  document.body.appendChild(el);
-  setTimeout(() => el.remove(), 4000);
-}
-setInterval(spawnCompliment, 3500);
-
-/* === HEART CURSOR === */
-document.addEventListener("mousemove", e => {
-  const h = document.createElement("div");
-  h.className = "heart";
-  h.innerText = "❤️";
-  h.style.left = e.pageX + "px";
-  h.style.top = e.pageY + "px";
-  document.body.appendChild(h);
-  setTimeout(() => h.remove(), 1500);
-});
-
-/* === ABOUT === */
-function openAbout() {
-  document.getElementById("about").style.display = "block";
-}
-function closeAbout() {
-  document.getElementById("about").style.display = "none";
-}
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
