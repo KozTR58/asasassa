@@ -1,224 +1,265 @@
-// Simple interactive logic with randomization and confetti
+// simpler helper
+const el = id => document.getElementById(id);
+
+// content arrays
 const prompts = [
-  "Will you go out with me tonight",
-  "Hey you I have to ask something small",
-  "This is awkward but honest Will you go out with me",
-  "Funny question but serious Will you say yes",
-  "I like you Would you go out with me",
-  "If you could say yes now Would you",
-  "Small ask big heart Will you go out with me",
-  "I will try my best Would you go out with me",
-  "No pressure but I had to ask Will you",
-  "One tiny chance Will you go out with me"
+  "Will you go out with me",
+  "Care to grab a coffee sometime",
+  "Wanna go on a stupid little adventure",
+  "Can I take you out",
+  "Would you like to try dinner with me",
+  "Do you want to hang out soon",
+  "How about we watch something together",
+  "Is tonight a good night for a bad decision",
+  "Can I steal one of your nights",
+  "Could I have the honor of a date"
 ];
 
 const compliments = [
   "You look beautiful today",
-  "Hi gorgeous",
-  "You shine a little brighter right now",
-  "Your smile is unfair",
-  "You got that glow today",
-  "I like how you move through the room",
-  "You are quietly stunning",
-  "That outfit suits you perfectly",
-  "You grabbed my attention without trying",
-  "There is something kind about your face",
-  "You make this look easy",
-  "You brought the light with you",
-  "I can tell you laugh like you mean it",
-  "Your energy is oddly calming",
-  "You are the part I did not expect"
-];
-
-const youDexterEaster = [
-  "You",
-  "Dexter",
-  "You",
-  "Dexter",
-  "You"
-];
-
-const rizzTitles = [
-  "Will you go out with me I will make it worth your while",
-  "Will you go out with me and let me try my best",
-  "Will you go out with me I promise a bad joke or two",
-  "Will you go out with me I will bring the sun",
-  "Will you go out with me I will make it simple"
+  "Hey gorgeous",
+  "You got that smile that stops time",
+  "Everything suits you so easily",
+  "You glow even when lights are off",
+  "I think your laugh could save days",
+  "There is a calm in your chaos",
+  "You make ordinary feel like luck",
+  "You wear confidence well",
+  "You have a way of making rooms softer",
+  "That color looks made for you",
+  "Your energy is quietly loud",
+  "You look stunning like you own the sky",
+  "Im lowkey jealous of your vibe",
+  "You make the little things nicer",
+  "You are a rare kind of lovely",
+  "I cant lie you are pretty unforgettable",
+  "You look like my favorite song",
+  "Your smile should be illegal"
 ];
 
 const yesResponses = [
   "You said yes Already grinning like a fool",
-  "You said yes I cant stop smiling like an idiot",
-  "You said yes Already smiling and thinking of a terrible joke",
-  "You said yes My day just got brighter I am grinning hard",
-  "You said yes Already grinning like a fool and blushing a bit"
+  "You said yes I am already plotting a lame first date",
+  "You said yes Cant wait to make you smile",
+  "You said yes My heart did a weird jump",
+  "You said yes I owe you a terrible joke and a good night"
 ];
 
-const postYesLines = [
-  "Cant wait to see you I owe you at least one terrible joke",
-  "See you soon I will try to make you laugh",
-  "Cant wait to meet you I will bring snacks and bad jokes",
-  "See you soon I am already planning a small hello",
-  "Cant wait I will do my best to make you smile"
+const easterEggs = [
+  "HEY YOU",
+  "TONIGHT IS THE NIGHT",
+  "DEX"
 ];
+
+// questions for info box
+const infoQuestions = [
+  "Are you curious about my games",
+  "Do you want to know my favorite song",
+  "Wanna know which show I rewatch often",
+  "Would you like to hear one weird fact about me",
+];
+
+// random helpers
+function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+function randInt(n){ return Math.floor(Math.random()*n); }
 
 // elements
-const promptEl = document.getElementById("prompt");
-const titleEl = document.getElementById("mainTitle");
-const yesBtn = document.getElementById("yes");
-const noBtn = document.getElementById("no");
-const resultEl = document.getElementById("result");
-const faqToggle = document.getElementById("faqToggle");
-const faqPanel = document.getElementById("faq");
-const closeFaq = document.getElementById("closeFaq");
-const easter = document.getElementById("easter");
-const confettiCanvas = document.getElementById("confettiCanvas");
-const showFormBtn = document.getElementById("showFormBtn");
-const tinyForm = document.querySelector(".tinyForm");
-const hideForm = document.getElementById("hideForm");
-const flying = document.createElement("div");
-flying.className = "flying";
-flying.textContent = "💛";
+const promptEl = el('prompt');
+const afterEl = el('after');
+const yesBtn = el('yes');
+const noBtn = el('no');
+const faqOpen = el('faqOpen');
+const faq = el('faq');
+const faqClose = el('faqClose');
+const randomQuestionEl = el('randomQuestion');
+const miniBio = el('miniBio');
+const easter = el('easter');
+const confettiCanvas = el('confettiCanvas');
+const catFly = el('catFly');
+const floatingHearts = document.querySelector('.floatingHearts');
+const form = el('noteForm');
+const formRes = el('formResult');
 
-// set some initial randomized content
-function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
-function initContent(){
-  promptEl.textContent = pick(prompts);
-  titleEl.textContent = pick(rizzTitles);
-  // show random easter egg sometimes
-  if(Math.random() < 0.6){
-    easter.textContent = pick(youDexterEaster);
-    easter.style.opacity = 0.06 + Math.random()*0.18;
-  } else {
-    easter.textContent = "";
+// init
+function init(){
+  // pick prompt and set
+  const p = pick(prompts);
+  promptEl.textContent = p + " ?";
+  // set a random question in box
+  randomQuestionEl.textContent = pick(infoQuestions) + "?";
+  // set mini bio (small tweak as requested)
+  miniBio.textContent = "I am Kayra. I play games I overthink things and yeah sometimes I am a little slow. In quiet moments I find myself thinking about you sometimes";
+  // random easter overlay occasionally
+  if(Math.random() < 0.45){
+    showEaster();
   }
 }
-initContent();
 
-// No button escape behavior
+function showEaster(){
+  const txt = pick(easterEggs);
+  easter.textContent = txt;
+  easter.style.opacity = 1;
+  easter.classList.add('pop');
+  setTimeout(()=>{ easter.style.opacity = 0; easter.classList.remove('pop') }, 1800);
+}
+
+// No button hover escape
 let escapes = 0;
-noBtn.addEventListener("mouseenter", () => {
+noBtn.addEventListener('mouseenter', () => {
   escapes++;
+  // random shape transform
+  noBtn.style.position = 'fixed';
   const w = window.innerWidth - noBtn.offsetWidth - 40;
-  const h = window.innerHeight - noBtn.offsetHeight - 40;
-  const x = Math.max(10, Math.floor(Math.random() * w));
-  const y = Math.max(60, Math.floor(Math.random() * h));
-  noBtn.style.position = "fixed";
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
-  // shape and size change
-  const scale = Math.max(0.45, 1 - escapes * 0.12);
-  noBtn.style.transform = `scale(${scale}) rotate(${(Math.random()*40-20)}deg)`;
-  noBtn.style.borderRadius = `${10 + Math.floor(Math.random()*50)}%`;
-  // yes grows a bit and gets a different text sometimes
-  yesBtn.style.transform = `scale(${1 + Math.min(0.6, escapes * 0.12)})`;
+  const h = window.innerHeight - noBtn.offsetHeight - 80;
+  const left = Math.max(12, Math.floor(Math.random()*w));
+  const top = Math.max(80, Math.floor(Math.random()*h));
+  noBtn.style.left = left + 'px';
+  noBtn.style.top = top + 'px';
+  const scale = Math.max(0.5, 1 - escapes*0.09);
+  const rotate = (Math.random()*40 - 20);
+  noBtn.style.transform = `scale(${scale}) rotate(${rotate}deg)`;
+  // slight yes grow
+  yesBtn.style.transform = `scale(${1 + Math.min(0.6, escapes*0.09)})`;
 });
 
-// if click no -> playful message
-noBtn.addEventListener("click", (e)=>{
+// If user clicks No quickly, playful message
+noBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  resultEl.textContent = "You cannot just say no that easily";
-  promptEl.textContent = pick(prompts);
+  promptEl.textContent = "No is a mood but not the whole story";
+  afterEl.textContent = pick(compliments);
   setTimeout(()=> {
-    resultEl.textContent = "Click a button. Be honest.";
-  }, 1300);
+    promptEl.textContent = pick(prompts) + " ?";
+    afterEl.textContent = "Choose honestly";
+  }, 1500);
 });
 
-// Yes click -> confetti and flying creature and rizz lines
-yesBtn.addEventListener("click", ()=>{
-  // randomize rizz line
-  const yLine = pick(yesResponses);
-  const pLine = pick(postYesLines);
-  resultEl.textContent = yLine;
-  // show small flying creature
-  document.body.appendChild(flying);
-  flying.style.display = "flex";
-  flying.style.left = (window.innerWidth/2 + (Math.random()*200-100)) + "px";
-  flying.style.top = (window.innerHeight/2 + (Math.random()*200-100)) + "px";
-  flying.animate([
-    { transform: "translateY(0) scale(0.9)", opacity: 0 },
-    { transform: "translateY(-180px) scale(1.1)", opacity: 1 },
-    { transform: "translateY(-360px) scale(0.7)", opacity: 0 }
-  ], { duration: 1500, easing: "cubic-bezier(.2,.9,.2,1)"});
-  setTimeout(()=>{ if(flying.parentNode) flying.parentNode.removeChild(flying); }, 1500);
-
-  // confetti
+// Yes click behavior
+yesBtn.addEventListener('click', () => {
+  // show rizz line
+  const r = pick(yesResponses);
+  promptEl.textContent = r;
+  // show confetti
   launchConfetti();
-
-  // small post yes message change after short delay
-  setTimeout(()=>{ resultEl.textContent = pLine; }, 800);
-
-  // change prompt to a random compliment once yes
-  setTimeout(()=>{ promptEl.textContent = pick(compliments); }, 900);
+  // floating hearts
+  spawnHearts();
+  // show cat fly animation
+  flyCat();
+  // slight reset after a bit
+  setTimeout(()=> {
+    promptEl.textContent = pick(prompts) + " ?";
+    afterEl.textContent = pick(compliments);
+    yesBtn.style.transform = '';
+    noBtn.style.transform = '';
+  }, 4000);
 });
 
-// FAQ open / close
-faqToggle.addEventListener("click", ()=> {
-  faqPanel.setAttribute("aria-hidden", "false");
-  window.scrollTo({ top: 0, behavior: "smooth" });
+// FAQ open close
+faqOpen.addEventListener('click', () => {
+  faq.setAttribute('aria-hidden','false');
+  window.scrollTo(0,0);
 });
-closeFaq.addEventListener("click", ()=> {
-  faqPanel.setAttribute("aria-hidden", "true");
-});
-
-// tiny form open/close
-showFormBtn.addEventListener("click", ()=> {
-  tinyForm.style.display = "block";
-});
-hideForm.addEventListener("click", ()=> {
-  tinyForm.style.display = "none";
+faqClose.addEventListener('click', () => {
+  faq.setAttribute('aria-hidden','true');
 });
 
-// keyboard escape to close
-document.addEventListener("keydown", (e)=> {
-  if(e.key === "Escape") {
-    faqPanel.setAttribute("aria-hidden", "true");
-    tinyForm.style.display = "none";
+// simple local save form
+form.addEventListener('submit', (ev) => {
+  ev.preventDefault();
+  const name = el('name').value || 'Anon';
+  const note = el('note').value || '';
+  if(!note.trim()){
+    formRes.textContent = 'Write something first';
+    formRes.style.color = '#ffd43b';
+    formRes.setAttribute('aria-hidden','false');
+    return;
   }
+  // store in localStorage
+  const key = 'kayraNotes';
+  const existing = JSON.parse(localStorage.getItem(key) || "[]");
+  existing.push({name, note, at:new Date().toISOString()});
+  localStorage.setItem(key, JSON.stringify(existing));
+  formRes.textContent = 'Saved locally thank you';
+  formRes.style.color = '#61FF87';
+  formRes.setAttribute('aria-hidden','false');
+  form.reset();
+  setTimeout(()=> formRes.setAttribute('aria-hidden','true'), 3000);
 });
 
-// Confetti simple implementation
+// confetti implementation (simple)
 function launchConfetti(){
-  const ctx = confettiCanvas.getContext("2d");
-  resizeCanvas();
+  const c = confettiCanvas;
+  c.width = window.innerWidth;
+  c.height = window.innerHeight;
+  const ctx = c.getContext('2d');
   const pieces = [];
-  const count = 70;
-  for(let i=0;i<count;i++){
+  for(let i=0;i<120;i++){
     pieces.push({
-      x: Math.random()*confettiCanvas.width,
-      y: Math.random()*confettiCanvas.height - confettiCanvas.height,
-      w: 8 + Math.random()*8,
-      h: 6 + Math.random()*6,
-      color: `hsl(${Math.floor(Math.random()*60)+40},90%,55%)`,
-      vy: 2 + Math.random()*5,
-      vx: -2 + Math.random()*4,
-      rot: Math.random()*360,
-      vr: -6 + Math.random()*12
+      x: Math.random()*c.width,
+      y: Math.random()*-c.height,
+      vx: (Math.random()-0.5)*6,
+      vy: Math.random()*6+2,
+      size: Math.random()*6+4,
+      color: `hsl(${Math.floor(Math.random()*60)+40},90%,60%)`
     });
   }
-  let t=0;
-  const anim = setInterval(()=>{
-    t+=1;
-    ctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
+  let t = 0;
+  function frame(){
+    t++;
+    ctx.clearRect(0,0,c.width,c.height);
     for(const p of pieces){
       p.x += p.vx;
       p.y += p.vy;
-      p.vy += 0.05;
-      p.rot += p.vr;
-      ctx.save();
-      ctx.translate(p.x,p.y);
-      ctx.rotate(p.rot * Math.PI/180);
+      p.vy += 0.12;
       ctx.fillStyle = p.color;
-      ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
-      ctx.restore();
+      ctx.fillRect(p.x, p.y, p.size, p.size*0.6);
     }
-    if(t>120){ clearInterval(anim); ctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height); }
-  },1000/60);
+    if(t < 120) requestAnimationFrame(frame);
+    else ctx.clearRect(0,0,c.width,c.height);
+  }
+  frame();
 }
 
-function resizeCanvas(){
-  confettiCanvas.width = window.innerWidth;
-  confettiCanvas.height = window.innerHeight;
+// floating hearts spawn
+function spawnHearts(){
+  const container = floatingHearts;
+  for(let i=0;i<16;i++){
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.style.left = (20 + Math.random()*60) + '%';
+    h.style.top = (60 + Math.random()*20) + '%';
+    h.style.opacity = 0.9;
+    h.style.transform = `scale(${0.6+Math.random()*0.8})`;
+    container.appendChild(h);
+    // animate
+    setTimeout(()=> h.classList.add('fly'), 60);
+    setTimeout(()=> h.remove(), 2500);
+  }
 }
-window.addEventListener("resize", resizeCanvas);
-resizeCanvas();
+
+// cat fly animation
+function flyCat(){
+  const c = catFly;
+  c.style.transition = 'transform 1400ms cubic-bezier(.12,.8,.24,1)';
+  c.style.transform = 'translateX(-50%) translateY(-120vh)';
+  setTimeout(()=> {
+    c.style.transform = 'translateX(-50%) translateY(110%)';
+  }, 1800);
+}
+
+// initial call
+init();
+
+// small styles injection for dynamic elements like hearts and easter
+const style = document.createElement('style');
+style.textContent = `
+.easter{position:absolute;right:18px;top:18px;color:rgba(255,255,255,0.08);font-weight:800;letter-spacing:1px;z-index:20;transition:opacity .3s ease;opacity:0}
+.easter.pop{transform:scale(1.06);opacity:1}
+.heart{position:absolute;width:18px;height:18px;transform-origin:center;pointer-events:none}
+.heart:before,.heart:after{content:"";position:absolute;width:12px;height:18px;background:#ff6b9a;border-radius:10px}
+.heart:before{left:6px;transform:rotate(-45deg)}
+.heart:after{right:6px;transform:rotate(45deg)}
+.heart.fly{animation:heartUp 2s linear forwards}
+@keyframes heartUp{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-140px) scale(1.6)}}
+`;
+document.head.appendChild(style);
+
