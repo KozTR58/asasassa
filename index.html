@@ -2,106 +2,130 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Will you go out with me? — I'll make it worth your while</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="bg-overlay"></div>
+  <div id="app">
+    <header class="top">
+      <h1 id="mainTitle">Will you go out with me? — I'll make it worth your while</h1>
+      <div class="top-right">
+        <button id="soundToggle" class="small">🔈</button>
+        <button id="faqOpen" class="small">Curious about me? Tell me more</button>
+      </div>
+    </header>
 
-  <header class="site-header">
-    <h1 class="main-title">Will you go out with me? — I'll make it worth your while</h1>
-    <nav class="top-actions">
-      <button id="curiousBtn" class="small">Curious about me? Click here</button>
-    </nav>
-  </header>
+    <main class="card">
+      <p id="subQ" class="subq">Hey. I have something to ask.</p>
 
-  <main class="container">
-    <section class="card" id="questionCard">
-      <p id="subQuestion" class="sub-question">Hey. I have something to ask.</p>
-      <div class="control-row">
+      <div class="buttons">
         <button id="yesBtn" class="btn yes">Yes</button>
-        <div class="smiley" id="smiley">😊</div>
         <button id="noBtn" class="btn no">No</button>
       </div>
-      <p id="resultText" class="result-text">Choose honestly</p>
-    </section>
 
-    <section class="lower-grid">
-      <div class="box" id="curiousBox">
-        <h3>Curious about me</h3>
-        <p id="curiousShort">
-          I am Kayra. I play games, I overthink things, and yeah sometimes I am a little slow.
-          In quiet moments I find myself thinking about you sometimes.
-        </p>
-        <button id="tellMore" class="small">Tell me more</button>
-      </div>
+      <p id="resultText" class="result">Click a button. Be honest.</p>
 
-      <div class="box" id="randomQBox">
-        <h3>Random question</h3>
-        <p id="randomPrompt">Wanna know which show I rewatch often?</p>
-      </div>
+      <div id="floatingCompliments" aria-hidden="true"></div>
+    </main>
 
-      <div class="box" id="sendNote">
-        <h3>Send a note</h3>
-        <input id="noteName" placeholder="Your name" />
-        <textarea id="noteText" placeholder="Say hi tell me something"></textarea>
-        <p class="muted">i might not see i still working on this thing</p>
-        <button id="saveLoc" class="small">Save locally</button>
-      </div>
-    </section>
-
-    <footer class="footer">
-      <p class="please">Please say yes</p>
-    </footer>
-  </main>
+    <footer class="foot">Please say yes</footer>
+  </div>
 
   <!-- Modal / FAQ -->
-  <div id="faqModal" class="modal" aria-hidden="true">
+  <div id="modal" class="modal" aria-hidden="true">
     <div class="modal-content" role="dialog" aria-modal="true">
-      <button id="faqCloseTop" class="close-x" aria-label="Close">×</button>
-      <div class="modal-body">
+      <button class="modal-close" id="modalCloseTop" aria-label="close">✕</button>
+      <div class="modal-body" id="modalBody">
         <h2>Who is Kayra?</h2>
         <p class="who">
-I’m Kayra.
-I play games, I overthink things, and yeah sometimes I’m a little slow. In quiet moments I find myself thinking about you sometimes.
+I am Kayra. I play games, I overthink things, and yeah sometimes I am a little slow. In quiet moments I find myself thinking about you sometimes.
 
 I like music that hits for no reason.
-Ezhel Imkansizim
+Ezhel İmkansızım
 Alexander Rybak Fairytale
-Sam Ask Herseyi Affeder Mi
+Sam Aşk Her Şeyi Affeder Mi
 
-My favorite game is The Last of Us Part II.
-My favorite show is Berlin.
-My favorite color is yellow.
+My favorite game is The Last of Us Part II
+My favorite show is Berlin
+My favorite color is yellow
 
-If you have songs you love, I would honestly listen to them too. For me, that’s a pleasure. Like Kali Uchis I Wish You Roses.
+If you have songs you love, I would honestly listen to them too. For me, that’s a pleasure. Like Kali Uchis I Wish You Roses
 
 This is just me. No pressure.
         </p>
 
-        <h3>Why did you make this?</h3>
-        <p>Because saying things straight is hard. This felt more honest than pretending I don’t care. Also I thought it would be fun.</p>
-
         <h3>FAQ</h3>
-        <div class="qa"><strong>You're not my type.</strong><p>That’s fair. I don’t really try to fit into types anyway. I just show up as myself.</p></div>
-        <div class="qa"><strong>I’m not into you.</strong><p>I understand. Thanks for being honest. I respect that.</p></div>
-        <div class="qa"><strong>Bro you’re fat, what are you 500 lbs?</strong><p>Yeah I’m big, but I’ve got space in my heart for good vibes and good music.</p></div>
-        <div class="qa"><strong>This is a bit much.</strong><p>Maybe a little. But it’s real. And I prefer real over cool.</p></div>
-        <div class="qa"><strong>Why should I say yes?</strong><p>Because yes is simple. Because I’m honest and kind. And because I’ll try.</p></div>
-        <div class="qa"><strong>What if I say no?</strong><p>That’s okay. You don’t owe me anything. I’ll respect it.</p></div>
-        <div class="qa"><strong>You’re doing things that actually make me uncomfortable.</strong><p>I understand, and I’m sorry for making you feel that way. For me to really know, you need to tell me directly. Otherwise, I might not realize it.</p></div>
-        <div class="qa"><strong>If you’re still here…</strong><p>Well if you’re still here, maybe you could give me a tiny chance.</p></div>
-      </div>
 
-      <div class="modal-bottom">
-        <button id="faqCloseBottom" class="small">Nevermind this is awkward but it's ok ❤️</button>
+        <div class="qa">
+          <strong>You're not my type.</strong>
+          <p>That’s fair. I don’t really try to fit into types anyway. I just show up as myself.</p>
+        </div>
+
+        <div class="qa">
+          <strong>I’m not into you.</strong>
+          <p>I understand. Thanks for being honest. I respect that.</p>
+        </div>
+
+        <div class="qa">
+          <strong>Bro you're fat, what are you 500 lbs?</strong>
+          <p>Yeah I’m big, but I’ve got space in my heart for good vibes and good music.</p>
+        </div>
+
+        <div class="qa">
+          <strong>This is a bit much.</strong>
+          <p>Maybe a little. But it’s real. And I prefer real over cool.</p>
+        </div>
+
+        <div class="qa">
+          <strong>Why should I say yes?</strong>
+          <p>Because yes is simple. Because I’m honest and kind. And because I’ll try.</p>
+        </div>
+
+        <div class="qa">
+          <strong>What if I say no?</strong>
+          <p>That’s okay. You don’t owe me anything. I’ll respect it.</p>
+        </div>
+
+        <div class="qa">
+          <strong>You’re doing things that actually make me uncomfortable.</strong>
+          <p>I understand, and I’m sorry for making you feel that way. For me to really know, you need to tell me directly. Otherwise, I might not realize it.</p>
+        </div>
+
+        <div class="qa">
+          <strong>If you’re still here…</strong>
+          <p>Well if you’re still here, maybe you could give me a tiny chance.</p>
+        </div>
+
+        <hr/>
+
+        <h3>Contact</h3>
+        <p>If you want to say hi, leave a short message — I might not see i still working on this thing.</p>
+        <form id="contactForm">
+          <input type="text" id="name" placeholder="Your name (optional)" />
+          <input type="email" id="email" placeholder="Your email (optional)" />
+          <textarea id="message" placeholder="Say something nice"></textarea>
+          <div class="form-row">
+            <button id="sendBtn" type="submit" class="small">Send</button>
+            <button id="mailtoBtn" type="button" class="small">Open email</button>
+          </div>
+        </form>
+
+        <div style="height:28px"></div>
+        <div class="modal-bottom-row">
+          <button id="modalNever" class="never">Nevermind, this is awkward... but it’s fine ❤️</button>
+        </div>
+
       </div>
     </div>
   </div>
 
-  <!-- Container for dynamic hearts/trail and confetti -->
-  <div id="particleLayer" aria-hidden="true"></div>
+  <!-- canvas for yes confetti/hearts -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <audio id="ambient" loop preload="auto">
+    <source src="https://cdn.jsdelivr.net/gh/creativetimofficial/public-assets/soft-music.mp3" type="audio/mpeg">
+  </audio>
 
   <script src="script.js"></script>
 </body>
